@@ -1,0 +1,21 @@
+import { Activity, AudioLines, MapPin, Shield, TriangleAlert, Footprints, Users } from 'lucide-react';
+import Card from '../components/Card';
+
+const inputs = [
+  { icon: MapPin, name: 'Device location', note: 'GPS only · verified area data not connected' },
+  { icon: AudioLines, name: 'Voice signal', note: 'Unavailable · model not connected' },
+  { icon: Footprints, name: 'Movement signal', note: 'Live phone sensors · local heuristic' },
+];
+
+export default function AboutPage() {
+  return <div className="space-y-6">
+    <div><p className="mb-2 text-xs font-semibold uppercase tracking-[.16em] text-primary">SafeGaurd</p><h1 className="text-3xl font-semibold tracking-tight">A clearer way to prepare</h1><p className="mt-2 max-w-3xl text-sm leading-6 text-muted">SafeGaurd brings device location, available phone signals, and a user-confirmed contact alert into one place. It is an academic prototype, not a certified emergency service.</p></div>
+    <Card title="System overview" icon={<Activity size={16} />}>
+      <div className="grid gap-3 md:grid-cols-3">{inputs.map(({ icon: Icon, name, note }) => <div key={name} className="rounded-xl border border-line p-4"><Icon className="mb-3 text-primary" size={20} /><p className="font-semibold">{name}</p><p className="mt-1 text-xs text-muted">{note}</p></div>)}</div>
+      <p className="my-3 text-center text-xl font-bold text-primary" aria-hidden="true">↓</p>
+      <div className="mx-auto grid max-w-2xl gap-3 sm:grid-cols-[1fr_auto_1fr] sm:items-center"><div className="rounded-xl border border-primary/40 bg-primary/5 p-4"><Shield className="mb-3 text-primary" size={20} /><p className="font-semibold">Available-signal score</p><p className="mt-1 text-xs text-muted">Unavailable inputs are excluded</p></div><span className="hidden text-primary sm:block">→</span><div className="rounded-xl border border-danger/40 bg-danger/5 p-4"><TriangleAlert className="mb-3 text-danger" size={20} /><p className="font-semibold">Review → confirm</p><p className="mt-1 text-xs text-muted">User chooses whether to record and send an alert</p></div></div>
+    </Card>
+    <div className="grid gap-5 md:grid-cols-2"><Card title="What is implemented"><p className="text-sm leading-6 text-muted">The website supports device GPS, local phone-motion heuristics, saved contacts, alert history, and confirmed-alert delivery hooks. SMS/call delivery is disabled until server credentials are configured and a contact opts in.</p></Card><Card title="Current limitations"><p className="text-sm leading-6 text-muted">No trained voice or crime model is connected, and verified local incident data is unavailable. The displayed signal score is incomplete and must not be treated as a personal danger assessment.</p></Card><Card title="Privacy by design"><p className="text-sm leading-6 text-muted">Location is requested by the user. Motion readings stay on the device. Voice detection is unavailable, so the website does not record or send microphone audio.</p></Card><Card title="Before public deployment"><p className="text-sm leading-6 text-muted">This backend is a single-user prototype without login or rate limiting. Keep SMS/call delivery disabled on public hosts until accounts, per-user contact separation, and abuse controls are in place.</p></Card></div>
+    <Card title="How an alert works"><div className="grid gap-4 sm:grid-cols-3"><div className="rounded-lg border border-line p-4"><p className="text-xs font-bold uppercase tracking-wider text-muted">01 · Review</p><p className="mt-2 text-sm">Check the signal and location shown.</p></div><div className="rounded-lg border border-line p-4"><p className="text-xs font-bold uppercase tracking-wider text-muted">02 · Confirm</p><p className="mt-2 text-sm">Choose whether to save and alert trusted contacts.</p></div><div className="rounded-lg border border-line p-4"><p className="text-xs font-bold uppercase tracking-wider text-muted">03 · Reach out</p><p className="mt-2 text-sm">Configured providers send notifications; otherwise use the device SMS or call action.</p></div></div><p className="mt-3 flex items-center gap-2 text-xs text-muted"><Users size={14} />No emergency service is contacted automatically.</p></Card>
+  </div>;
+}

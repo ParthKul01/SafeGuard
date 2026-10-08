@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: "IBM Plex Sans", system-ui, sans-serif;
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-line: var(--line);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-primary: var(--primary);
+  --color-safe: var(--safe);
+  --color-warn: var(--warn);
+  --color-danger: var(--danger);
+}
+
+:root {
+  --bg: #f4f2ec; --surface: #fffefa; --line: #e3e0d7; --fg: #202c29; --muted: #747a73;
+  --primary: #175b52; --safe: #26734d; --warn: #a96524; --danger: #a63d32;
+}
+.dark {
+  --bg: #151b19; --surface: #202825; --line: #35413b; --fg: #edf0e9; --muted: #aab4aa;
+  --primary: #78b7a7; --safe: #75c49a; --warn: #e4b56d; --danger: #ee8a7b;
+}
+
+html { color-scheme: light; }
+html.dark { color-scheme: dark; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+.num { font-variant-numeric: tabular-nums; }
+:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+/* Dim OSM tiles in dark theme; zone circles and markers are unaffected. */
+.dark .leaflet-tile-pane { filter: invert(1) hue-rotate(180deg) brightness(.85) contrast(.9); }
+.leaflet-container { background: var(--surface); font-family: inherit; }
+input, select, textarea { color: var(--fg); }
+::selection { background: color-mix(in srgb, var(--primary) 22%, transparent); }

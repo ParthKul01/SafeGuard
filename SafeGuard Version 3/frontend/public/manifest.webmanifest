@@ -1,0 +1,13 @@
+{
+  "name": "SafeGaurd Personal Safety",
+  "short_name": "SafeGaurd",
+  "description": "Proactive intelligence for personal safety (academic prototype)",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f4f2ec",
+  "theme_color": "#175b52",
+  "icons": [
+    { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
